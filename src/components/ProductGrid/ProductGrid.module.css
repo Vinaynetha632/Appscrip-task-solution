@@ -1,0 +1,157 @@
+.gridContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.controllerBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+}
+
+.leftControls {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.itemCount {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.filterToggleBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+.filterToggleBtn:hover {
+  color: #000;
+}
+
+.arrowLeft, .arrowRight {
+  font-size: 10px;
+}
+
+.filterText {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.rightControls {
+  position: relative;
+}
+
+.sortDropdown {
+  appearance: none;
+  background: transparent;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  padding-right: 20px;
+  outline: none;
+  font-family: inherit;
+  color: var(--text-primary);
+}
+
+.sortDropdown option {
+  font-weight: normal;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-color);
+}
+
+.mobileFilterBtn {
+  display: none;
+}
+
+.contentLayout {
+  display: flex;
+  margin-top: 30px;
+  gap: 30px;
+}
+
+.sidebarWrapper {
+  width: 250px;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.productGrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 20px;
+  transition: all 0.3s ease;
+}
+
+.productGridExpanded {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1024px) {
+  .productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .productGridExpanded {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .controllerBar {
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 0;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .leftControls {
+    display: none;
+  }
+  
+  .rightControls {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .mobileFilterBtn {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  
+  .divider {
+    display: none;
+  }
+  
+  .sidebarWrapper {
+    display: none; /* In full implementation, this could open a full-screen mobile menu */
+  }
+  
+  .productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 10px;
+  }
+  
+  .productGridExpanded {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Always 2 columns on mobile */
+  }
+}
