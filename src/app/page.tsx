@@ -4,11 +4,19 @@ import ProductGrid from "../components/ProductGrid/ProductGrid";
 
 // Server Action / Fetch
 async function getProducts() {
-  const res = await fetch('https://fakestoreapi.com/products');
-  if (!res.ok) {
-    throw new Error('Failed to fetch data');
+  try {
+    // We add no-store to force SSR instead of static build-time generation
+    // which prevents the build from crashing if FakeStoreAPI rate limits Vercel's IP
+    const res = await fetch('https://fakestoreapi.com/products', { cache: 'no-store' });
+    if (!res.ok) {
+      console.warn('API returned non-200. Defaulting to empty array.');
+      return [];
+    }
+    return res.json();
+  } catch (error) {
+    console.warn('Failed to fetch data from FakeStoreAPI. Defaulting to empty array.', error);
+    return []; // Return empty gracefully so the build doesn't crash
   }
-  return res.json();
 }
 
 export default async function Home() {
