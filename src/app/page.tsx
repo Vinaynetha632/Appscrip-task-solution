@@ -1,6 +1,7 @@
 import styles from "./page.module.css";
 import Hero from "../components/Hero/Hero";
 import ProductGrid from "../components/ProductGrid/ProductGrid";
+import fallbackProducts from "../fallbackProducts.json";
 
 // Server Action / Fetch
 async function getProducts() {
@@ -9,13 +10,13 @@ async function getProducts() {
     // which prevents the build from crashing if FakeStoreAPI rate limits Vercel's IP
     const res = await fetch('https://fakestoreapi.com/products', { cache: 'no-store' });
     if (!res.ok) {
-      console.warn('API returned non-200. Defaulting to empty array.');
-      return [];
+      console.warn('API returned non-200. Defaulting to fallback items.');
+      return fallbackProducts;
     }
     return res.json();
   } catch (error) {
-    console.warn('Failed to fetch data from FakeStoreAPI. Defaulting to empty array.', error);
-    return []; // Return empty gracefully so the build doesn't crash
+    console.warn('Failed to fetch data from FakeStoreAPI. Defaulting to fallback items.', error);
+    return fallbackProducts; // Return fallback gracefully so the build doesn't crash
   }
 }
 
